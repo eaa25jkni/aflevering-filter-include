@@ -135,10 +135,19 @@ function filterMovies() {
     });
 }
 
-  
-
-
+displayMovies(filteredMovies);
 }
+
+
+selectedCategory.addEventListener("change", filterMovies);
+
+searchInput.addEventListener("input", filterMovies)
+
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  filterMovies();
+});
 
 
 
