@@ -1,5 +1,6 @@
 "use strict";
 
+//Array med film fra movie.txt. Det er et array med objekter og deres antributter som skrives op key: value
 const movies = [
   {
     id: 1,
@@ -98,63 +99,81 @@ const movies = [
   },
 ];
 
+//-----------------------------------------------------------------------------
 //Her kommer de fire variabler
 
-//Variablen peger på html elementet med id movies-container
+//Variablen finder og peger på html elementet med id movies-container
 const movieContainer = document.querySelector("#movies-container");
 
-//Denne henter den valgte kategori fra dropdownen.
+//Denne finder og henter den valgte kategori (genre) fra dropdownen.
 const selectedCategory = document.querySelector("#category-select");
 
+//finder søgefeltet fra vores html
 const searchInput = document.querySelector("#gsearch");
 
+//Denne finder vores form i html
 const form = document.querySelector("form");
 
+//Her vil vi lave en funktion som kan filtere vores film ud fra kategori (genre) og filtrer vores film mens der skrives i søgefeltet
 function filterMovies() {
+  //henter den valgte værdi fra dropdown.menuen og gemmer den i en konstant variabel med navnet selectedValue
   const selectedValue = selectedCategory.value;
 
+  //henter teksten fra søgefeltet og gemmer den i en konstant variabel med navnet searchTerm. Her bruges der både toLowerCase for at lave alle bogstaver om til små (for at undgå at hvis brugeren skriver med store at den så siger det er forkert). Der bruges for trim, for at fjerne hvis brugeren nu skulle skrive nogle unødvendige mellemrum.
   const searchTerm = searchInput.value.toLowerCase().trim();
 
-  let filteredMovies = movies
+  //Her oprettes en omskiftelig variabel der pejer på hele arrayet til at starte med (ALLE)
+  let filteredMovies = movies;
+
+
+  //-----------------------------------------------------------------------------
+  //Nu kommer delen hvor vi faktisk skal gøre så man kan filtere i filmene
 
   // if statements, så filmene filtreres ud fra den valgte kategori.
+  //Hvis brugeren ikke (!=) har valgt "alle"
   if (selectedValue != "alle") {
-   // Ret IKKE denne linje
+    // så skal filteredMovies være i lig med filteredMovies.filtered med parameteret movie. Her laver den et nyt array med elementer.
     filteredMovies = filteredMovies.filter((movie) => {
-        // Ret denne linje, bortset ===
-        return movie.genre === selectedValue;
+      // Her returnere og laver den et nyt array med elementer som indeholde den valgte selectedValue bruger har valgt i dropdown-menuen. Det kunne eksempelvis være horror, så bliver der kun vist film med genreen horror.
+      return movie.genre === selectedValue;
     });
   }
 
-  //denne if statement filtere indhold i søgefeltet 
+  //denne if statement filtere indhold i søgefeltet
+  //den siger at hvis søgefeltet ikke er tomt, altså der er noget i søgefeltet
   if (searchTerm != "") {
-    // Ret IKKE denne linje
+    // så skal den sige at filteredMovies er lig med filteredMovies.filter med movie som parameter. Her tjekker den om filmenes titler indeholder det er der blevet skrevet i søgeordet.
     filteredMovies = filteredMovies.filter((movie) => {
-        // Ret denne linje, bortset fra toLowerCase().includes
-        return movie.title.toLowerCase().includes(searchTerm);
+      // hvorefter den returnere de film som indeholder det i søgefeltet.
+      return movie.title.toLowerCase().includes(searchTerm);
     });
+  }
+
+  //denne viser de filtrerede film 
+  displayMovies(filteredMovies);
 }
 
-displayMovies(filteredMovies);
-}
-
-
+//-----------------------------------------------------------------------------
+//Her gør vi sådan at den lytter efter handlinger, ved at bruge addEventListener
+//Vi siger at når der sket en forandring (change) i selectedCategory, så skal den affyre funktionen filterMovies af
 selectedCategory.addEventListener("change", filterMovies);
 
+//Vi siger at når der laves et input i searchInput, så skal den affyre funktionen filterMovies af
 searchInput.addEventListener("input", filterMovies)
 
-
+//For at undgå at siden skal reloade når formularen er sendt, tilføjer vi en addEventListenner på form der lytter efter et submit
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   filterMovies();
 });
 
 
-
+//Her laves der en funktion med brug af .map og .join automatisk indsætter html-struktur 
 function displayMovies(movieList) {
-  const html = movieList
-    .map((movie) => {
-      return `
+  //vi laver en konstant variable som gennemløber hvor enkelt film i moviesList ved at bruge .map (.map laver et nyt array). 
+  const html = movieList.map((movie) => {
+    //For hver film oprettes en template literal (her henter den selv automatisk værdiener da der er blevet brugt ${})   
+    return `
     <article class="movie-card">
     <h2>${movie.title}</h2>
     <ul>
@@ -170,10 +189,13 @@ function displayMovies(movieList) {
     </figure>
 </article>`;
     })
+    //med .join returener det den med en lang tekst-streng
     .join("");
 
+    //her puttes det ind i vores movieContainer der er i vores html
   movieContainer.innerHTML = html;
 }
 
+//denne viser filmene
 displayMovies(movies);
 
