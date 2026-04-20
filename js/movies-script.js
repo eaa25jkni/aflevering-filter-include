@@ -126,7 +126,14 @@ function filterMovies() {
     });
   }
 
-  if 
+  //denne if statement filtere indhold i søgefeltet 
+  if (searchTerm != "") {
+    // Ret IKKE denne linje
+    filteredMovies = filteredMovies.filter((movie) => {
+        // Ret denne linje, bortset fra toLowerCase().includes
+        return movie.title.toLowerCase().includes(searchTerm);
+    });
+}
 
   
 
