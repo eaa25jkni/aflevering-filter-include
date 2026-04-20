@@ -9,6 +9,25 @@
   </head>
   <body>
     <h1>CineFlex Movies</h1>
+    <br>
+    <form>
+      <label for="category-select">Vælg genre</label>
+      <select id="category-select">
+        <option value="Alle">Alle</option>
+        <option value="science-fiction">Science-fiction</option>
+        <option value="action">Action</option>
+        <option value="drama">Drama</option>
+        <option value="comedy">Comedy</option>
+        <option value="horror">Horror</option>
+      </select>
+
+      <label for="gsearch">Søg</label>
+      <input type="search" name="gsearch" id="gsearch" />
+      <input type="submit" value="Søg" />
+
+    </form>
+    <br>
+
     <section id="movies-container"></section>
 
     <script src="js/movies-script.js"></script>

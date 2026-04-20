@@ -110,6 +110,12 @@ const searchInput = document.querySelector("#gsearch");
 
 const form = document.querySelector("form");
 
+function filterMovies() {
+  
+}
+
+
+
 function displayMovies(movieList) {
   const html = movieList
     .map((movie) => {
