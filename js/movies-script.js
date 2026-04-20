@@ -117,6 +117,20 @@ function filterMovies() {
 
   let filteredMovies = movies
 
+  // if statements, så filmene filtreres ud fra den valgte kategori.
+  if (selectedValue != "alle") {
+   // Ret IKKE denne linje
+    filteredMovies = filteredMovies.filter((movie) => {
+        // Ret denne linje, bortset ===
+        return movie.genre === selectedValue;
+    });
+  }
+
+  if 
+
+  
+
+
 }
 
 
