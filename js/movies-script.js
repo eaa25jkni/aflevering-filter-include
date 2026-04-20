@@ -98,8 +98,17 @@ const movies = [
   },
 ];
 
+//Her kommer de fire variabler
+
 //Variablen peger på html elementet med id movies-container
 const movieContainer = document.querySelector("#movies-container");
+
+//Denne henter den valgte kategori fra dropdownen.
+const selectedCategory = document.querySelector("#category-select");
+
+const searchInput = document.querySelector("#gsearch");
+
+const form = document.querySelector("form");
 
 function displayMovies(movieList) {
   const html = movieList
@@ -127,26 +136,3 @@ function displayMovies(movieList) {
 
 displayMovies(movies);
 
-// function displayMovies(movieList) {
-//   movieContainer.innerHTML += "";
-//   //Loop
-//   movies.forEach((item) => {
-//     movieContainer.innerHTML += `
-//     <article class="movie-card">
-//   <h2>${item.title}</h2>
-
-//   <ul>
-//      <li>${item.genre}</li>
-//      <li>${item.year}</li>
-//      <li>${item.duration}</li>
-//    </ul>
-
-//    <figure><img src="${item.img}" alt="${item.title}">
-//      <figcaption>${item.title}</figcaption>
-//    </figure>
-// </article>`;
-//   });
-// }
-
-/*Med denne funktionen vises alle filmene i arrayet */
-//displayMovies(movies);
