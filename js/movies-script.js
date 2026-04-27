@@ -187,8 +187,9 @@ function displayMovies(movieList) {
         </a>
         <figcaption>Læs mere på IMDB</figcaption>
     </figure>
-</article>`;
+  </article>`;
     })
+
     //med .join returener det den med en lang tekst-streng
     .join("");
 
